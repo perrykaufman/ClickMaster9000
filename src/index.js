@@ -1,14 +1,22 @@
+/*
+ * Elements
+ */
+const clickerButtonElement = document.getElementById("clickerButton");
 const setFieldElement = document.getElementById("setValue");
 const configElement = document.getElementById("configSection");
 const displayElement = document.getElementById("outputDisplay");
 const configToggleElement = document.getElementById("configOpen");
 
-//Listeners
-document.getElementById("clickerButton").onclick = function() {
-    var count = localStorage.getItem("count");
-    set(++count)
+/*
+ * Listeners
+ */
+
+//increment count with clicker button
+clickerButtonElement.onclick = function() {
+    increment();
 }
 
+//toggle config open/closed
 configToggleElement.onclick = function(){
     if (configElement.style.display == "none") {
         configElement.style.display = "block"
@@ -19,8 +27,15 @@ configToggleElement.onclick = function(){
     }
 }
 
+//set count to input value
 document.getElementById("setButton").onclick = function(){
-    var num = Number(setFieldElement.value);
+    var str = setFieldElement.value
+    
+    if (str === "") {
+        return;
+    }
+
+    var num = Number(str);
 
     if (Number.isInteger(num) && num > -1) {
         set(num)
@@ -30,13 +45,36 @@ document.getElementById("setButton").onclick = function(){
     }
     setFieldElement.value = "";
 }
+//keyboard control of count
+document.addEventListener('keydown', function(event){
+    if (event.target.tagName.toUpperCase() === "INPUT") {
+        //do nothing
+        return;
+    }
+
+    switch (event.code.toUpperCase()) {
+        case "SPACE":
+            increment();
+            break;
+        case "ENTER":
+            increment();
+            break;
+        case "BACKSPACE":
+            decrement();
+            break;
+    };
+});
 
 init();
 
-//Functions
+/*
+ * Functions
+ */
+
+//initialize count and hide config
 function init(){
     
-    //Initialize Count
+    //initialize Count
     var count = localStorage.getItem("count")
     if (count === null) {
         localStorage.setItem("count", 0)
@@ -48,7 +86,21 @@ function init(){
     //Hide Config
     configElement.style.display = "none"
 }
+
+//set the count to specified number
 function set(num) {
     localStorage.setItem("count", num);
     displayElement.innerHTML = num
+}
+
+//increase the count by 1
+function increment() {
+    var count = localStorage.getItem("count");
+    set(++count);
+}
+
+//decrease the count by 1
+function decrement() {
+    var count = localStorage.getItem("count");
+    set(--count);
 }

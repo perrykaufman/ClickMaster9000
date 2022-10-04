@@ -1,14 +1,73 @@
 <html>
     <style>
+        body {
+            background: #ef224b;
+            font-family: Arial;
+            height: 50%;
+            margin-top: 10%;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            display: center;
+            font-size: 70px;
+        }
 
+        #outputDisplay {
+            font-size: 75px;
+            margin: 5px;
+        }
+
+        #configOpen, #configOpen:visited {
+            color:  #7e0080 !important;
+        }
+
+        #configOpen:hover {
+            color: black !important;
+        }
+
+        button {
+            border: 2px solid black;
+            border-radius: 5px;
+            background-color: #7e0080;
+            color: white;
+            padding: 2px;
+        }
+
+        #clickerButton {
+            display: block;
+            font-size: 30px;
+            margin: 10px auto 10px auto;
+            padding: 10px 20px 10px 20px;
+        }
+
+        .config {
+            margin-left: 50%;
+            width: 50%;
+        }
+
+        input {
+            border: 1px solid black;
+            border-radius: 3px;
+            padding: 2px;
+        }
+
+        #configSection {
+            border: 1px solid black;
+            border-radius: 5px;
+            margin: 5px;
+            padding: 5px;
+        }
+        #configSection p {
+            margin: 5px;
+        }
     </style>
     <head>
         <title>Click Master 9000</title>
     </head>
     <body>
-        <div class="title">
-            <h1>Click Master 9000</h1>
-        </div>
+        <h1 class="title">Click Master 9000</h1>
         <div class="main">
             <div>
                 <span id="outputDisplay" class="output">0</span>
@@ -17,8 +76,9 @@
         </div>
         <div class="config">
             <a id="configOpen" href="#">config (show)</a>
-            <div id="configSection" class="collapsable">
-                <input id="setValue" type="text">
+            <div id="configSection">
+                <p><b>Instructions:</b> The enter and space keys will increase the count by 1 and backspace will decrease the count by 1.</p>
+                <input id="setValue" type="text" placeholder="enter a positive number">
                 <button id="setButton">Set Count</button>
             </div>
         </div>
